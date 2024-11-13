@@ -1,6 +1,6 @@
 # Non-Commercial Use License
 
-**Copyright (c) [Year] [Your Name or Organization]**
+**Copyright (c) 2024 CircleLink**
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to use, copy, modify, and distribute copies of the Software, subject to the following conditions:
 
