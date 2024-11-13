@@ -92,4 +92,5 @@ The bot uses Discord's permission system to control who can use specific feature
 
 ## Support
 
-If you encounter any issues, have suggestions, or need help setting up the bot, feel free to reach out through the support channels or the bot's help command.
+If you encounter any issues, have suggestions, or need help setting up the bot, feel free to reach out to me or join my discord server!
+Link: https://discord.gg/cNx2f3vUVw
