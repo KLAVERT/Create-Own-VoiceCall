@@ -2,7 +2,7 @@ import { SlashCommandBuilder, SlashCommandUserOption, SlashCommandStringOption, 
 import { REST } from '@discordjs/rest';
 import { Routes } from 'discord-api-types/v9';
 import config from '../config';
-import mainTranlation from '../translations/mainTranlation';
+import mainTranlation from '../translations/mainTranslation';
 
 const createUserOption = (name: string, description: string) => {
   return new SlashCommandUserOption()
@@ -86,6 +86,10 @@ const commands = [
   ]),
   createCommand(config.commands.ghostAll, mainTranlation.commands.ghostAllDescription),
   createCommand(config.commands.unGhostAll, mainTranlation.commands.unGhostAllDescription),
+  createCommand(config.commands.setBitrate, mainTranlation.commands.setBitrateDescription, [
+    createIntegerOption('bitrate', mainTranlation.commands.setBitrateOptionDescription, 8, 96),
+  ]),
+
 ];
 
 const rest = new REST({ version: '9' }).setToken(config.token.DiscordToken);

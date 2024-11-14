@@ -20,6 +20,7 @@ import { voiceUnghostCommand } from './commands/voiceUnghost';
 import { voiceGhostCommand } from './commands/voiceGhost';
 import { voiceGhostAllCommand } from './commands/voiceGhostAll';
 import { voiceUnGhostAllCommand } from './commands/voiceUnghostAll';
+import { voiceSetBitrateCommand } from './commands/voiceSetBitrate';
 
 const client = new Client({
   intents: [
@@ -51,6 +52,7 @@ client.on('interactionCreate', async (interaction) => {
     [config.commands.ghost]: voiceGhostCommand,
     [config.commands.ghostAll]: voiceGhostAllCommand,
     [config.commands.unGhostAll]: voiceUnGhostAllCommand,
+    [config.commands.setBitrate]: voiceSetBitrateCommand,
   };
   
   const handler = commandHandlers[interaction.commandName];

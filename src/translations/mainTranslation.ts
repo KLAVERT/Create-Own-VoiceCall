@@ -39,6 +39,8 @@ export default {
     ghostUserDescription: 'The user to ghost.',
     ghostAllDescription: "This command allows you to 'ghost' all users in your claimed voice channel.",
     unGhostAllDescription: "This command allows you to 'unghost' all users in your claimed voice channel",
+    setBitrateDescription: "Adjust the bitrate of your current voice channel.",
+    setBitrateOptionDescription: "The desired bitrate (8-96 kbps).",
   },
   debugger: {
     //I might add this later! No need for now :D
@@ -189,6 +191,13 @@ export default {
       noPermissions: "You do not have permission to unghost users in this voice channel.",
       success: "All users have been unghosted in the voice channel: %s.",
       accessRestored: "Your access to the voice channel %s has been restored.",
+    },
+    voiceSetBitrate: {
+      mustBeInVoice: "You must be in a voice channel to adjust the bitrate.",
+      noPermissions: "You do not have permission to change the bitrate of this channel.",
+      invalidBitrate: "The bitrate must be between 8 and 96 kbps.",
+      success: "The channel's bitrate has been set to %s kbps.",
+      error: "An error occurred while adjusting the bitrate.",
     },
   },
 };

@@ -1,7 +1,7 @@
 import { CommandInteraction, GuildMember, VoiceChannel, PermissionFlagsBits } from 'discord.js';
 import { userChannels } from '../utils/voiceCalls';
 import config from '../config';
-import mainTranlation from '../translations/mainTranlation';
+import mainTranlation from '../translations/mainTranslation';
 
 export async function voiceClaimCommand(interaction: CommandInteraction) {
   const member = interaction.member as GuildMember;

@@ -1,6 +1,6 @@
 import { CommandInteraction, GuildMember, VoiceChannel } from 'discord.js';
 import { userChannels } from '../utils/voiceCalls';
-import mainTranlation from '../translations/mainTranlation';
+import mainTranlation from '../translations/mainTranslation';
 
 function formatMessage(template: string, ...args: string[]): string {
   let i = 0;
