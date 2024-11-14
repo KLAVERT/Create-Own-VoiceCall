@@ -2,11 +2,7 @@ import { CommandInteraction, GuildMember, User } from 'discord.js';
 import { userChannels } from '../utils/voiceCalls';
 import config from '../config';
 import mainTranlation from '../translations/mainTranslation';
-
-function formatMessage(template: string, ...args: string[]): string {
-    let i = 0;
-    return template.replace(/%s/g, () => args[i++] || "");
-}
+import formatMessage from '../utils/formatMessage';
 
 export async function voiceRemoveOwnerCommand(interaction: CommandInteraction) {
   const member = interaction.member as GuildMember;

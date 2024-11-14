@@ -1,4 +1,4 @@
-import { SlashCommandBuilder, SlashCommandUserOption, SlashCommandStringOption, SlashCommandIntegerOption } from 'discord.js';
+import { SlashCommandBuilder, SlashCommandUserOption, SlashCommandStringOption, SlashCommandIntegerOption, SlashCommandRoleOption } from 'discord.js';
 import { REST } from '@discordjs/rest';
 import { Routes } from 'discord-api-types/v9';
 import config from '../config';
@@ -27,7 +27,14 @@ const createIntegerOption = (name: string, description: string, minValue: number
     .setMaxValue(maxValue);
 };
 
-const createCommand = (name: string, description: string, options: (SlashCommandUserOption | SlashCommandStringOption | SlashCommandIntegerOption)[] = []) => {
+const createRoleOption = (name: string, description: string, required: boolean = true) => {
+  return new SlashCommandRoleOption()
+    .setName(name)
+    .setDescription(description)
+    .setRequired(required);
+};
+
+const createCommand = (name: string, description: string, options: (SlashCommandUserOption | SlashCommandStringOption | SlashCommandIntegerOption | SlashCommandRoleOption)[] = []) => {
   const command = new SlashCommandBuilder()
     .setName(name)
     .setDescription(description);
@@ -39,6 +46,8 @@ const createCommand = (name: string, description: string, options: (SlashCommand
       command.addStringOption(option);
     } else if (option instanceof SlashCommandIntegerOption) {
       command.addIntegerOption(option);
+    } else if (option instanceof SlashCommandRoleOption) {
+      command.addRoleOption(option);
     }
   });
 
@@ -89,7 +98,12 @@ const commands = [
   createCommand(config.commands.setBitrate, mainTranlation.commands.setBitrateDescription, [
     createIntegerOption('bitrate', mainTranlation.commands.setBitrateOptionDescription, 8, 96),
   ]),
-
+  createCommand(config.commands.sync, mainTranlation.commands.syncDescription, [
+    createRoleOption(mainTranlation.commands.syncRole, mainTranlation.commands.syncRoleDescription)
+  ]),
+  createCommand(config.commands.unsync, mainTranlation.commands.unsyncDescription, [
+    createRoleOption(mainTranlation.commands.unsyncRole, mainTranlation.commands.unsyncRoleDescription)
+  ]),
 ];
 
 const rest = new REST({ version: '9' }).setToken(config.token.DiscordToken);

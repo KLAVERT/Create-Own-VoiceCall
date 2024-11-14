@@ -2,11 +2,7 @@ import { CommandInteraction, GuildMember, PermissionFlagsBits } from 'discord.js
 import { userChannels } from '../utils/voiceCalls';
 import config from '../config';
 import mainTranlation from '../translations/mainTranslation';
-
-function formatMessage(template: string, ...args: string[]): string {
-  let i = 0;
-  return template.replace(/%s/g, () => args[i++] || "");
-}
+import formatMessage from '../utils/formatMessage';
 
 export async function voiceGhostCommand(interaction: CommandInteraction) {
   const member = interaction.member as GuildMember;
@@ -51,7 +47,6 @@ export async function voiceGhostCommand(interaction: CommandInteraction) {
   await voiceChannel.permissionOverwrites.edit(targetUser.id, {
     ViewChannel: false,
   });
-
 
   await interaction.reply({
     content: formatMessage(mainTranlation.messages.voiceGhost.success, targetUser.tag, voiceChannel.name),

@@ -2,8 +2,8 @@ import { Client, GatewayIntentBits } from 'discord.js';
 import { setBotStatus } from './utils/statusManager';
 import { checkBotVoice } from './utils/voiceCalls';
 import config from './config';
-import { permitCommand } from './commands/voicePermit';
 import './utils/deployCommands';
+import { permitCommand } from './commands/voicePermit';
 import { permitAdminCommand } from './commands/voicePermitAdmin';
 import { voiceRenameCommand } from './commands/voiceRename';
 import { voicePublicCommand } from './commands/voicePublic';
@@ -22,6 +22,8 @@ import { voiceGhostAllCommand } from './commands/voiceGhostAll';
 import { voiceUnGhostAllCommand } from './commands/voiceUnghostAll';
 import { voiceSetBitrateCommand } from './commands/voiceSetBitrate';
 import { checkForUpdate } from './utils/checkUpdate';
+import { voiceSyncCommand } from './commands/voiceSync';
+import { voiceUnsyncCommand } from './commands/voiceUnsync';
 
 const client = new Client({
   intents: [
@@ -54,7 +56,10 @@ client.on('interactionCreate', async (interaction) => {
     [config.commands.ghostAll]: voiceGhostAllCommand,
     [config.commands.unGhostAll]: voiceUnGhostAllCommand,
     [config.commands.setBitrate]: voiceSetBitrateCommand,
+    [config.commands.sync]: voiceSyncCommand,
+    [config.commands.unsync]: voiceUnsyncCommand,
   };
+  
   
   const handler = commandHandlers[interaction.commandName];
   if (handler) {

@@ -35,5 +35,7 @@ export default {
     ghostAll: 'voice-ghostall', //Set the name of the command, don't use CAPITAL!
     unGhostAll: 'voice-unghostall', //Set the name of the command, don't use CAPITAL!
     setBitrate: 'voice-setbitrate',//Set the name of the command, don't use CAPITAL!
+    sync: 'voice-sync',//Set the name of the command, don't use CAPITAL!
+    unsync: 'voice-unsync',//Set the name of the command, don't use CAPITAL!
   },
 };
