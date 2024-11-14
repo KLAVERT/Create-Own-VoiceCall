@@ -83,6 +83,9 @@ This Discord bot allows users to create and manage their own voice channels, off
 - **/voice-limit [number]**  
   Sets a limit on how many users can join your voice channel. A value of `0` means no limit.
 
+- **/voice-setbitrate [number]**  
+  Sets a new bitrate to the call your in.
+
 ## Permissions & Roles
 
 The bot uses Discord's permission system to control who can use specific features:
