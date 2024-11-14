@@ -21,6 +21,7 @@ import { voiceGhostCommand } from './commands/voiceGhost';
 import { voiceGhostAllCommand } from './commands/voiceGhostAll';
 import { voiceUnGhostAllCommand } from './commands/voiceUnghostAll';
 import { voiceSetBitrateCommand } from './commands/voiceSetBitrate';
+import { checkForUpdate } from './utils/checkUpdate';
 
 const client = new Client({
   intents: [
@@ -64,6 +65,7 @@ client.on('interactionCreate', async (interaction) => {
 client.once('ready', async () => {
   setBotStatus(client);
   checkBotVoice(client, config.voice.voiceJoinChannel, config.voice.voiceJoinCategory);
+  checkForUpdate();
   console.log('Bot is logged in and ready!');
 });
 
