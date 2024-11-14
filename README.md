@@ -63,6 +63,12 @@ This Discord bot allows users to create and manage their own voice channels, off
 - **/voice-unghostall**  
   Unghost all users in your voice channel, making it visible to everyone.
 
+- **/voice-sync**  
+  permit a role for your voicechannel.
+
+- **/voice-unsync**  
+  reject a role from your voicechannel.
+
 ## Setup & Installation
 
 1. **Invite the Bot:** First, you need to invite the bot to your Discord server by following the invite link.
