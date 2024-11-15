@@ -71,6 +71,7 @@ client.once('ready', async () => {
   setBotStatus(client);
   checkBotVoice(client, config.voice.voiceJoinChannel, config.voice.voiceJoinCategory);
   checkForUpdate();
+  console.log('Please join my discord server: https://discord.gg/cNx2f3vUVw')
   console.log('Bot is logged in and ready!');
 });
 

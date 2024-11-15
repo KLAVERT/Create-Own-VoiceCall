@@ -1,6 +1,6 @@
 {
   "name": "discord-bot-klavertjuh",
-  "version": "1.0.3-beta",
+  "version": "1.0.4-beta",
   "main": "index.js",
   "scripts": {
     "start": "ts-node src/index.ts"
