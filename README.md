@@ -21,6 +21,9 @@ This Discord bot allows users to create and manage their own voice channels, off
 - **/voice-rename**  
   Rename your voice channel to a new name.
 
+- **/voice-removename**
+  removes the name from the database
+
 - **/voice-public**  
   Make your voice channel public for everyone to join.
 
