@@ -1,6 +1,6 @@
 {
   "name": "discord-bot-klavertjuh",
-  "version": "1.0.4-beta",
+  "version": "2.0.0-beta",
   "main": "index.js",
   "scripts": {
     "start": "ts-node src/index.ts"
@@ -11,8 +11,12 @@
   "description": "",
   "dependencies": {
     "discord.js": "^14.16.3",
+    "knex": "^3.1.0",
+    "mysql2": "^3.11.4",
     "node-fetch": "^2.7.0",
-    "semver": "^7.6.3"
+    "pg": "^8.13.1",
+    "semver": "^7.6.3",
+    "sqlite3": "^5.1.7"
   },
   "devDependencies": {
     "@types/node": "^22.9.0",

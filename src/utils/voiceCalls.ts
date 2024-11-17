@@ -1,5 +1,6 @@
 import { Client, VoiceState, CategoryChannel, PermissionFlagsBits, VoiceChannel, ChannelType, GuildMember } from 'discord.js';
 import config from '../config';
+import { saveChannelName, getChannelName, clearStorage } from './storageManager';
 
 export const userChannels = new Map<string, { 
   creatorId: string;
@@ -22,6 +23,7 @@ export function checkBotVoice(client: Client, targetChannelId: string, targetCat
         }
         return;
       }
+
       if (config.general.debugger) {
         console.log(`${user.username} has joined the monitored voice channel!`);
       }
@@ -35,8 +37,11 @@ export function checkBotVoice(client: Client, targetChannelId: string, targetCat
       }
 
       try {
+        const previousName = await getChannelName(user.id);
+        const channelName = previousName || `${user.username}'s ${config.voice.voicechannelSuffix}`;
+
         const newVoiceChannel = await guild.channels.create({
-          name: `${user.username}'s ${config.voice.voicechannelSuffix}`,
+          name: channelName,
           type: ChannelType.GuildVoice,
           parent: category.id,
           permissionOverwrites: [
@@ -67,6 +72,8 @@ export function checkBotVoice(client: Client, targetChannelId: string, targetCat
           console.log(`${user.username} has been moved to ${newVoiceChannel.name}`);
         }
 
+        await saveChannelName(user.id, channelName);
+
         userChannels.set(newVoiceChannel.id, { 
           creatorId: newState.member.id, 
           channel: newVoiceChannel, 
@@ -93,6 +100,10 @@ export function checkBotVoice(client: Client, targetChannelId: string, targetCat
             if (channelInfo.creatorId === oldState.member?.id) {
               await voiceChannel.delete();
               userChannels.delete(voiceChannel.id);
+              if (config.general.removeName === true)
+              {
+              await clearStorage(channelInfo.creatorId);
+              }
               if (config.general.debugger) {
                 console.log(`The voice channel "${voiceChannel.name}" was deleted because it is empty.`);
               }
@@ -100,35 +111,6 @@ export function checkBotVoice(client: Client, targetChannelId: string, targetCat
           } catch (error) {
             if (config.general.debugger) {
               console.error(`Error deleting the voice channel "${voiceChannel.name}":`, error);
-            }
-          }
-        }
-      }
-    }
-
-    if (oldState.channelId && oldState.channelId !== newState.channelId) {
-      const user = oldState.member?.user;
-      const voiceChannel = oldState.guild.channels.cache.get(oldState.channelId) as VoiceChannel;
-
-      if (user && voiceChannel) {
-        const channelInfo = userChannels.get(voiceChannel.id);
-
-        if (channelInfo) {
-          const allOwnersLeft = ![channelInfo.creatorId, ...channelInfo.coOwners].some(id => voiceChannel.members.has(id));
-          
-          if (allOwnersLeft && voiceChannel.members.size === 0) {
-            userChannels.delete(voiceChannel.id);
-            console.log(`The owner and co-owners of the channel ${voiceChannel.name} have left, and it is now unclaimed.`);
-
-            try {
-              await voiceChannel.delete();
-              if (config.general.debugger) {
-                console.log(`The channel ${voiceChannel.name} has been deleted because it is empty and unclaimed.`);
-              }
-            } catch (error) {
-              if (config.general.debugger) {
-                console.error(`Error deleting the voice channel ${voiceChannel.name}:`, error);
-              }
             }
           }
         }

@@ -95,6 +95,7 @@ const commands = [
   ]),
   createCommand(config.commands.ghostAll, mainTranlation.commands.ghostAllDescription),
   createCommand(config.commands.unGhostAll, mainTranlation.commands.unGhostAllDescription),
+  createCommand(config.commands.removeName, mainTranlation.commands.removeNameDescription),
   createCommand(config.commands.setBitrate, mainTranlation.commands.setBitrateDescription, [
     createIntegerOption('bitrate', mainTranlation.commands.setBitrateOptionDescription, 8, 96),
   ]),

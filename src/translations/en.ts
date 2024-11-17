@@ -1,5 +1,3 @@
-//In order to change the translation, copy paste it in this file!
-
 export default {
   commands: {
     permitDescription: "Allow a user to join a private voice channel",
@@ -39,6 +37,15 @@ export default {
     ghostUserDescription: 'The user to ghost.',
     ghostAllDescription: "This command allows you to 'ghost' all users in your claimed voice channel.",
     unGhostAllDescription: "This command allows you to 'unghost' all users in your claimed voice channel",
+    setBitrateDescription: "Adjust the bitrate of your current voice channel.",
+    setBitrateOptionDescription: "The desired bitrate (8-96 kbps).",
+    syncDescription: "Synchronize your voice channel with a specific role",
+    syncRole: "role",
+    syncRoleDescription: "The role to synchronize with the voice channel",
+    unsyncDescription: "Remove the role sync from your voice channel",
+    unsyncRole: "role",
+    unsyncRoleDescription: "The role to unsync from the voice channel",
+    removeNameDescription: "Removes the stored name of your voice channel from the database.",
   },
   debugger: {
     //I might add this later! No need for now :D
@@ -189,6 +196,34 @@ export default {
       noPermissions: "You do not have permission to unghost users in this voice channel.",
       success: "All users have been unghosted in the voice channel: %s.",
       accessRestored: "Your access to the voice channel %s has been restored.",
+    },
+    voiceSetBitrate: {
+      mustBeInVoice: "You must be in a voice channel to adjust the bitrate.",
+      noPermissions: "You do not have permission to change the bitrate of this channel.",
+      invalidBitrate: "The bitrate must be between 8 and 96 kbps.",
+      success: "The channel's bitrate has been set to %s kbps.",
+      error: "An error occurred while adjusting the bitrate.",
+    },
+    voiceSync: {
+      noGuildOrMember: "This command can only be used in a server.",
+      notInVoiceChannel: "You must be in a voice channel to use this command.",
+      noPermission: "You do not have permission to sync the voice channel. You must be the owner, co-owner, or an administrator.",
+      noRoleProvided: "Please specify a role to sync.",
+      success: "The role **%s** has been successfully synced with your voice channel **%s**.",
+      error: "Something went wrong while syncing the role. Please try again later.",      
+    },
+    voiceUnsync: {
+      noGuildOrMember: "This command can only be used in a server.",
+      notInVoiceChannel: "You need to be in a voice channel to use this command.",
+      noPermission: "You do not have permission to unsync the role from this voice channel. You must be the owner, co-owner, or an administrator.",
+      noRoleProvided: "Please specify a role to unsync.",
+      success: "The role **%s** has been successfully unsynced from your voice channel **%s**.",
+      error: "An error occurred while unsyncing the role. Please try again later.",
+    },
+    voiceRemoveName: {
+      mustBeMember: "You must be a member to use this command.",
+      success: "The name of your voice channel has been successfully removed from the database or JSON file.",
+      error: "An error occurred while trying to remove your voice channel name. Please try again later.",
     },
   },
 };

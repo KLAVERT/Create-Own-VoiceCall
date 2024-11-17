@@ -47,6 +47,7 @@ export default {
     unsyncDescription: "Remove the role sync from your voice channel",
     unsyncRole: "role",
     unsyncRoleDescription: "The role to unsync from the voice channel",
+    removeNameDescription: "Removes the stored name of your voice channel from the database.",
   },
   debugger: {
     //I might add this later! No need for now :D
@@ -220,6 +221,11 @@ export default {
       noRoleProvided: "Please specify a role to unsync.",
       success: "The role **%s** has been successfully unsynced from your voice channel **%s**.",
       error: "An error occurred while unsyncing the role. Please try again later.",
+    },
+    voiceRemoveName: {
+      mustBeMember: "You must be a member to use this command.",
+      success: "The name of your voice channel has been successfully removed from the database or JSON file.",
+      error: "An error occurred while trying to remove your voice channel name. Please try again later.",
     },
   },
 };

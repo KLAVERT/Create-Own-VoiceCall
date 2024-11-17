@@ -1,29 +1,11 @@
 import { Client, GatewayIntentBits } from 'discord.js';
 import { setBotStatus } from './utils/statusManager';
 import { checkBotVoice } from './utils/voiceCalls';
+import { testDatabaseConnection } from './utils/testDatabase';
 import config from './config';
 import './utils/deployCommands';
-import { permitCommand } from './commands/voicePermit';
-import { permitAdminCommand } from './commands/voicePermitAdmin';
-import { voiceRenameCommand } from './commands/voiceRename';
-import { voicePublicCommand } from './commands/voicePublic';
-import { voicePrivateCommand } from './commands/voicePrivate';
-import { voiceLimitCommand } from './commands/voiceLimit';
-import { voiceUnlimitCommand } from './commands/voiceUnlimit';
-import { voiceTransferCommand } from './commands/voiceTransfer';
-import { voiceClaimCommand } from './commands/voiceClaim';
-import { voiceRejectCommand } from './commands/voiceReject';
-import { voiceDisconnectCommand } from './commands/voiceDisconnect';
-import { voiceAddOwnerCommand } from './commands/voiceAddowner';
-import { voiceRemoveOwnerCommand } from './commands/voiceRemoveowner';
-import { voiceUnghostCommand } from './commands/voiceUnghost';
-import { voiceGhostCommand } from './commands/voiceGhost';
-import { voiceGhostAllCommand } from './commands/voiceGhostAll';
-import { voiceUnGhostAllCommand } from './commands/voiceUnghostAll';
-import { voiceSetBitrateCommand } from './commands/voiceSetBitrate';
 import { checkForUpdate } from './utils/checkUpdate';
-import { voiceSyncCommand } from './commands/voiceSync';
-import { voiceUnsyncCommand } from './commands/voiceUnsync';
+import * as commands from './utils/importCommands';
 
 const client = new Client({
   intents: [
@@ -38,41 +20,50 @@ client.on('interactionCreate', async (interaction) => {
   if (!interaction.isCommand()) return;
 
   const commandHandlers: { [key: string]: Function } = {
-    [config.commands.permit]: permitCommand,
-    [config.commands.adminPermit]: permitAdminCommand,
-    [config.commands.rename]: voiceRenameCommand,
-    [config.commands.public]: voicePublicCommand,
-    [config.commands.private]: voicePrivateCommand,
-    [config.commands.limit]: voiceLimitCommand,
-    [config.commands.unlimit]: voiceUnlimitCommand,
-    [config.commands.transfer]: voiceTransferCommand,
-    [config.commands.claim]: voiceClaimCommand,
-    [config.commands.reject]: voiceRejectCommand,
-    [config.commands.disconnect]: voiceDisconnectCommand,
-    [config.commands.addOwner]: voiceAddOwnerCommand,
-    [config.commands.removeOwner]: voiceRemoveOwnerCommand,
-    [config.commands.unghost]: voiceUnghostCommand,
-    [config.commands.ghost]: voiceGhostCommand,
-    [config.commands.ghostAll]: voiceGhostAllCommand,
-    [config.commands.unGhostAll]: voiceUnGhostAllCommand,
-    [config.commands.setBitrate]: voiceSetBitrateCommand,
-    [config.commands.sync]: voiceSyncCommand,
-    [config.commands.unsync]: voiceUnsyncCommand,
+    [config.commands.permit]: commands.permitCommand,
+    [config.commands.adminPermit]: commands.permitAdminCommand,
+    [config.commands.rename]: commands.voiceRenameCommand,
+    [config.commands.public]: commands.voicePublicCommand,
+    [config.commands.private]: commands.voicePrivateCommand,
+    [config.commands.limit]: commands.voiceLimitCommand,
+    [config.commands.unlimit]: commands.voiceUnlimitCommand,
+    [config.commands.transfer]: commands.voiceTransferCommand,
+    [config.commands.claim]: commands.voiceClaimCommand,
+    [config.commands.reject]: commands.voiceRejectCommand,
+    [config.commands.disconnect]: commands.voiceDisconnectCommand,
+    [config.commands.addOwner]: commands.voiceAddOwnerCommand,
+    [config.commands.removeOwner]: commands.voiceRemoveOwnerCommand,
+    [config.commands.unghost]: commands.voiceUnghostCommand,
+    [config.commands.ghost]: commands.voiceGhostCommand,
+    [config.commands.ghostAll]: commands.voiceGhostAllCommand,
+    [config.commands.unGhostAll]: commands.voiceUnGhostAllCommand,
+    [config.commands.setBitrate]: commands.voiceSetBitrateCommand,
+    [config.commands.sync]: commands.voiceSyncCommand,
+    [config.commands.unsync]: commands.voiceUnsyncCommand,
+    [config.commands.removeName]: commands.voiceRemoveNameCommand,
   };
-  
-  
+
   const handler = commandHandlers[interaction.commandName];
   if (handler) {
-    await handler(interaction, client);
+    try {
+      await handler(interaction, client);
+    } catch (error) {
+      console.error(`Error while executing command '${interaction.commandName}':`, error);
+      await interaction.reply({
+        content: 'An error occurred while executing this command.',
+        ephemeral: true,
+      });
+    }
   }
 });
 
 client.once('ready', async () => {
+  console.log('Bot is starting up...');
+  await testDatabaseConnection();
   setBotStatus(client);
   checkBotVoice(client, config.voice.voiceJoinChannel, config.voice.voiceJoinCategory);
   checkForUpdate();
-  console.log('Please join my discord server: https://discord.gg/cNx2f3vUVw')
-  console.log('Bot is logged in and ready!');
+  console.log('Bot successfully started and is ready for use!');
 });
 
 client.login(config.token.DiscordToken);
