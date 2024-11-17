@@ -72,7 +72,7 @@ This Discord bot allows users to create and manage their own voice channels, off
 - **/voice-unsync**  
   reject a role from your voicechannel.
 
-- **/voice-bitrate**
+- **/voice-bitrate**  
   Change the bitrate of the voicecall.
 
 ## Setup & Installation
