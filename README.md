@@ -101,5 +101,10 @@ The bot uses Discord's permission system to control who can use specific feature
 
 ## Support
 
+If you need help with the installation please check the github wiki: 
+https://github.com/KLAVERT/Create-Own-VoiceCall/wiki
+or
+https://github.com/KLAVERT/Create-Own-VoiceCall/wiki/Installation-Guide
+
 If you encounter any issues, have suggestions, or need help setting up the bot, feel free to reach out to me or join my discord server!
 Link: https://discord.gg/cNx2f3vUVw
